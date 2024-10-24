@@ -31,8 +31,23 @@ recognition.onresult = (event) => {
 // For text-to-speech
 function speak(text) {
     const speech = new SpeechSynthesisUtterance(text);
+
+    //Speech Parameters
+    speech.rate = 1;    // Default is 1, range is 0.1 to 10
+    speech.pitch = 1;   // Default is 1, range is 0 to 2
+    speech.volume = 1;  // Default is 1, range is 0 to 1
+
+    //Handle Multiple voices
+    const voices = window.speechSynthesis.getVoices();
+    speech.voice = voices.find(voice => voice.name === 'Google UK English Male'); // Change to desired voice
+
+    //Prevent Speech Overlap
+    window.speechSynthesis.cancel(); // Stop any ongoing speech
+    const speech = new SpeechSynthesisUtterance(text);
+    
     window.speechSynthesis.speak(speech);
 }
 
 // Optional: Speak the response from the bot
 // Call speak(data.response) after receiving the response in the sendBtn click event
+
