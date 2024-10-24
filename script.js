@@ -13,6 +13,7 @@ document.getElementById('sendBtn').addEventListener('click', async () => {
 
     const data = await response.json();
     responseContainer.innerText += `\nBot: ${data.response}`;
+    speak(data.response);
 });
 
 // Voice recognition for input
